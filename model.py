@@ -2,16 +2,9 @@ import quandl
 import yfinance as yf
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 from datetime import date,timedelta
-from sklearn.linear_model import LinearRegression
-from sklearn.svm import SVR
 from sklearn.model_selection import train_test_split
-from sklearn.model_selection import GridSearchCV
-import plotly.graph_objs as go
-import plotly.express as px
 import datetime as dt
-import datetime
 from sklearn.preprocessing import MinMaxScaler
 from dash.dependencies import Input, Output, State
 from tensorflow.keras.models import Sequential
@@ -73,12 +66,3 @@ def forecast_indicator(start_date,end_date,n_clicks,input1,input2):
     predicted_prices = scaler.inverse_transform(predicted_prices)
 
     return predicted_prices
-    # print(test_data)
-
-    # plt.plot(actual_prices, color="black", label=f"Actual Price")
-    # plt.plot(predicted_prices, color='green', label=f"Predicted Price")
-    # plt.title(f"Share Price")
-    # plt.xlabel('Time')
-    # plt.ylabel(f'Share Price')
-    # plt.legend()
-    # plt.show()
