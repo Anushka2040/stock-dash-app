@@ -8,6 +8,9 @@ import plotly.express as px
 from model import *
 from datetime import date
 from dash.dependencies import Input, Output, State
+from dash import callback_context
+from dash.exceptions import PreventUpdate
+
 
 
 
@@ -98,9 +101,13 @@ className="container")
     State('submit-input','value')
     )
 def get_data(n_clicks, input1):
-  ticker = yf.Ticker(input1) 
-  inf = ticker.info
-  df = pd.DataFrame().from_dict(inf, orient="index").T
+  changed_id = [p['prop_id'] for p in callback_context.triggered][0]
+  if n_clicks is None :
+    raise PreventUpdate
+  else:
+    ticker = yf.Ticker(input1) 
+    inf = ticker.info
+    df = pd.DataFrame().from_dict(inf, orient="index").T
   return df["logo_url"].iloc[0],df["shortName"].iloc[0]
 
 @app.callback(
@@ -108,10 +115,13 @@ def get_data(n_clicks, input1):
     Input('button-1','n_clicks'),
     State('submit-input','value')
     )
-def get_data(n_clicks, input1):
-  ticker = yf.Ticker(input1) 
-  inf = ticker.info
-  df = pd.DataFrame().from_dict(inf, orient="index").T
+def get_data(n_clicks1, input1):
+  if n_clicks1 is None :
+    raise PreventUpdate
+  else:
+    ticker = yf.Ticker(input1) 
+    inf = ticker.info
+    df = pd.DataFrame().from_dict(inf, orient="index").T
   return df["longBusinessSummary"].iloc[0] 
 
 #Callback function for stock price plot
@@ -121,11 +131,14 @@ def get_data(n_clicks, input1):
     Input('date-picker-range','end_date'),
     Input('button-2','n_clicks'),
     State('submit-input','value'))
-def update_data(start_date,end_date,n_clicks,input1):
-  ticker = yf.Ticker(input1)
-  df = yf.download( input1,start_date, end_date)
-  df.reset_index(inplace=True)
-  fig = get_stock_price_fig(df)
+def update_data(start_date,end_date,n_clicks2,input1):
+  if n_clicks2 is None :
+    raise PreventUpdate
+  else:
+    ticker = yf.Ticker(input1)
+    df = yf.download( input1,start_date, end_date)
+    df.reset_index(inplace=True)
+    fig = get_stock_price_fig(df)
   return dcc.Graph(figure=fig)
 
 def get_stock_price_fig(df):
@@ -142,11 +155,14 @@ def get_stock_price_fig(df):
     Input('date-picker-range','end_date'),
     Input('button-3','n_clicks'),
     State('submit-input','value'))
-def update_data(start_date,end_date,n_clicks,input1):
-  ticker = yf.Ticker(input1)
-  df = yf.download( input1,start_date, end_date)
-  df.reset_index(inplace=True)
-  fig = get_more(df)
+def update_data(start_date,end_date,n_clicks3,input1):
+  if n_clicks3 is None :
+    raise PreventUpdate
+  else:
+    ticker = yf.Ticker(input1)
+    df = yf.download( input1,start_date, end_date)
+    df.reset_index(inplace=True)
+    fig = get_more(df)
   return dcc.Graph(figure=fig)
 
 def get_more(df):
@@ -168,18 +184,21 @@ def get_more(df):
     Input('button-4','n_clicks'),
     Input('forecast-input','value'),
     State('submit-input','value'))
-def update_data(start_date,end_date,n_clicks,input1,input2):
-  test_start = end_date
-  test_end = pd.to_datetime(end_date) + pd.tseries.offsets.DateOffset(days=input1)
-  test_data = yf.download(input2,test_start,test_end)
-  test_data.reset_index(inplace=True)
-  test_data['Predicted'] = forecast_indicator(start_date,end_date,n_clicks,input1,input2)
-  fig = px.line(test_data,
-                    x= "Date",
-                    y= "Predicted",
-                    title="Predicted Prices")
-  
-  fig.update_traces(mode= 'markers+lines')
+def update_data(start_date,end_date,n_clicks4,input1,input2):
+  if n_clicks4 is None :
+    raise PreventUpdate
+  else:
+    test_start = end_date
+    test_end = pd.to_datetime(end_date) + pd.tseries.offsets.DateOffset(days=input1)
+    test_data = yf.download(input2,test_start,test_end)
+    test_data.reset_index(inplace=True)
+    test_data['Predicted'] = forecast_indicator(start_date,end_date,n_clicks4,input1,input2)
+    fig = px.line(test_data,
+                      x= "Date",
+                      y= "Predicted",
+                      title="Predicted Prices")
+    
+    fig.update_traces(mode= 'markers+lines')
 
   return dcc.Graph(figure=fig)
 
