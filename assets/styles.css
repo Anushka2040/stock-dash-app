@@ -1,0 +1,160 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: 0;
+  font-family: "Roboto", sans-serif;
+  
+}
+
+.bgimage {
+  height:100vh;
+  background: url('image2.jpg');
+  background-size:cover;
+  position:relative;
+}
+
+.bgtitle {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  text-align: center;
+  font-size: 4.2rem;
+  transform: translate(-50%, -50%);
+  color: azure;
+}
+
+.input{
+  text-align: center;
+  row-gap: 30px;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  background-color: black;
+  padding-bottom: 20px;
+}
+
+.start{
+  flex-grow: 4;
+  padding-top: 10px ;
+  font-size: 25px;
+  color: azure;
+  opacity: 60%;
+}
+
+.start-1{
+  padding-top: 10vh;
+  padding-right: 30vh;
+  padding-bottom: 0%;
+  flex-grow: 2;
+  color: wheat;
+  font-size: 22px;
+}
+
+.stock-code-input{
+  padding: 10px 32px;
+  flex-grow: 2;
+  align-items: stretch;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
+#submit-input{
+  padding: 10px 32px;
+}
+
+#button-1{
+  background-color: yellow;
+  border: none;
+  color: black;
+  padding: 10px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  
+}
+
+#date-picker-range{
+  flex-grow: 2;
+  font-size: 22px;
+}
+
+#button-2{
+  background-color: #4CAF50; /* Green */
+  color: black;
+  padding: 10px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border: none;
+  margin-right: 15px;
+}
+
+#button-3{
+  background-color: #4CAF50; /* Green */
+  color: black;
+  padding: 10px 32px;
+  text-align: center;
+  border: none;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.forecast{
+  flex-grow: 2;
+  justify-content: space-evenly;
+  flex-direction: row;
+  align-items: stretch;
+  padding-bottom: 30px;
+}
+
+#forecast-input{
+  padding: 10px 32px;
+}
+
+#button-4{
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: black;
+  padding: 10px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.logo-name{
+  margin-top: 10px;
+}
+
+.logo-name>#logo-image{
+  float: left;
+  width: 150px;
+  height: 140px;
+  padding-right:0px;
+  padding-top: 10px;
+}
+
+.logo-name>#company-description{
+  font-size: 90px ;
+  position: relative;
+  padding-top: 60px;
+  padding-left: 0px;
+  top: 28px;
+  left: 10px;
+}
+
+#logo-name{
+  padding: 50px 30px 0px 50px;
+  width: 135vh;
+}
+
+#description{
+    margin-top: 10px;
+    padding: 50px 30px 30px 50px;
+    height: auto;
+    margin-bottom: 0px;
+}
