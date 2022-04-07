@@ -189,10 +189,15 @@ def update_data(start_date,end_date,n_clicks4,input1,input2):
     raise PreventUpdate
   else:
     test_start = end_date
-    test_end = pd.to_datetime(end_date) + pd.tseries.offsets.DateOffset(days=input1)
-    test_data = yf.download(input2,test_start,test_end)
+    data = yf.download(input2,test_start)
+    # for x in range(input1):
+    #   test_end = pd.to_datetime(end_date) + pd.tseries.offsets.DateOffset(days=1)
+    test_data = data.loc[test_start:]
+    test_data = test_data[:input1]
+    print(test_data['Close'])
+    # test_data = yf.download(input2,test_start,test_end)
     test_data.reset_index(inplace=True)
-    test_data['Predicted'] = forecast_indicator(start_date,end_date,n_clicks4,input1,input2)
+    test_data['Predicted'] = forecast_indicator(start_date,end_date,input1,input2)
     fig = px.line(test_data,
                       x= "Date",
                       y= "Predicted",
