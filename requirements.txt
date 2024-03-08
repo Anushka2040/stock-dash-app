@@ -11,6 +11,6 @@ numpy
 pandas==1.4.0
 plotly==4.10.0
 scikit-learn
-scipy==1.7.3
-sklearn==0.0
+scipy
+sklearn
 yfinance==0.1.70
