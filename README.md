@@ -7,3 +7,6 @@
 * Built a machine learning model - Support Vector Regression (SVR) for predicting the stock prices. For the dataset, fetched stock price from last 60 days and splitted it into 9:1 ratio for training and testing respectively.
 
 * Tested the model's performance using Mean Squared Error (MSE) and Mean Absolute Error (MAE) on the testing dataset.
+
+Here is the link of the site deployed on Render:
+https://predict-stock-jmbb.onrender.com/
