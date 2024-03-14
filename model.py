@@ -12,7 +12,7 @@ from dash.dependencies import Input, Output, State
 # from tensorflow.keras.layers import Dense, Dropout, LSTM
 
 
-def forecast_indicator(start_date,end_date,input1,input2):
+def forecast_indicator(start_date,end_date,n_clicks,input1,input2):
     # df = yf.download(input2,start_date,end_date)
     # scaler = MinMaxScaler(feature_range=(0,1))
     # scaled_data = scaler.fit_transform(df['Close'].values.reshape(-1,1))
@@ -75,7 +75,7 @@ def forecast_indicator(start_date,end_date,input1,input2):
 
     df['Prediction'] = df[['Close']].shift(-forecast_out)
      
-    X = np.array(df.drop(['Prediction'],1))
+    X = np.array(df.drop(['Prediction'],axis=1))
 
     X = X[:-forecast_out]
 
@@ -94,7 +94,7 @@ def forecast_indicator(start_date,end_date,input1,input2):
         param_grid={
             'C': [0.1, 1, 100, 1000],
             'epsilon': [0.0001, 0.0005, 0.001, 0.005, 0.01, 0.05, 0.1, 0.5, 1, 5, 10],
-            'gamma': [0.0001, 0.001, 0.005, 0.1, 1, 3, 5]
+            'gamma': [0.0001, 0.001, 0.005, 0.1, 1, 3, 5],
         },
         cv=5, scoring='neg_mean_squared_error', verbose=0, n_jobs=-1)
     
@@ -105,9 +105,8 @@ def forecast_indicator(start_date,end_date,input1,input2):
                     tol=0.001, cache_size=200, verbose=False, max_iter=-1)
 
     best_result = best_svr.fit(X,y)
-    x_forecast = np.array(df.drop(['Prediction'],1))[-forecast_out:]
+    x_forecast = np.array(df.drop(['Prediction'],axis=1))[-forecast_out:]
 
     grid_prediction = best_result.predict(x_forecast)
-
 
     return grid_prediction

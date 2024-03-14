@@ -15,8 +15,8 @@
 
 .bgtitle {
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-  position: absolute;
-  top: 50%;
+  position: relative;
+  top: 13%;
   left: 50%;
   text-align: center;
   font-size: 4.2rem;
@@ -30,8 +30,10 @@
   display: flex;
   width: 100%;
   flex-direction: column;
-  background-color: black;
+  background-color: transparent;
   padding-bottom: 20px;
+  /* position: relative;
+  top:15%; */
 }
 
 .start{
